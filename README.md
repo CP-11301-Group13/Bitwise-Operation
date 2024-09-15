@@ -15,11 +15,11 @@ hw
 │   ├── AC.py
 │   ├── AC.c
 │   └── README.md       # Solution description
+├── AC_Code.c           # AC code (just a copy of solutions/AC.c)
 ├── special
 ├── subtasks.py         # Problem subtasks
-└── tests               # Test cases
-    ├── *.in
-    └── *.out
+├── *.in
+└── *.out
 ```
 
 ## Run judge locally
