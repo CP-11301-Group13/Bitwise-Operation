@@ -3,3 +3,4 @@ outputs/
 .vscode/
 a.exe
 a.out
+venv/
