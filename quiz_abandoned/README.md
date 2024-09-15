@@ -1,4 +1,7 @@
-# Bitwise Operators Quiz (Team 13)
+# Bitwise Operators Quiz 
+
+> [!CAUTION]
+> This folder is an abandoned proposal, and is kept for historical reasons. Please ignore it :)
 
 ## 說明
 
