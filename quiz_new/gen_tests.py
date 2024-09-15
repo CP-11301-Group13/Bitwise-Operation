@@ -207,11 +207,11 @@ def solve(arr: list[int], k: int) -> list[int]:
 
 # if trial_id is not provided, it will be automatically assigned
 @manager.trial(subtask_ids=0)
-def test_example() -> tuple[Input, Output]:
-    """Example test case, should be public."""
+def test_sample() -> tuple[Input, Output]:
+    """Sample test case, should be public."""
 
     k = 1
-    arr = [0b1010, 0b1100, 0b1111, 0b0000]
+    arr = [0b1010, 0b1100, 0b1110, 0b0000]
     res = solve(arr, k)
 
     return Input(arr, k), Output(arr=res)
