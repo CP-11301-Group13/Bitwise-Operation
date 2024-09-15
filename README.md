@@ -1,6 +1,6 @@
 # Bitwise Operations
 
-Group 13
+Group 20
 
 ## Directory Structure
 
