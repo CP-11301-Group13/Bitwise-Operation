@@ -7,10 +7,10 @@ python judge.py <program_file> [input_id, ...]
 python3 judge.py <program_file> [input_id, ...]
 
 
-# Example: run `ac_code1.py` with all inputs in `tests/`
-python solutions/ac_code1.py
-# Example: run `ac_code1.py` with `1.in` and `3.in`
-python solutions/ac_code1.py 1 3
+# Example: run `AC1.py` with all tests in `tests/`
+python solutions/AC1.py
+# Example: run `AC1.py` with `1.in` and `3.in`
+python solutions/AC1.py 1 3
 ```
 
 ## Git Workflow
