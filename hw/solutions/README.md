@@ -2,7 +2,7 @@
 
 ### 法一：使用 Bit masking
 
-時間複雜度：$O(QN)$
+時間複雜度： $O(QN)$
 
 ```c
 #include <stdio.h>
@@ -44,7 +44,7 @@ int main() {
 
 ### 法二：直接遍例每個 bit
 
-時間複雜度：$O(QN\log U)$，其中 $U$ 是輸入的最大整數
+時間複雜度： $O(QN\log U)$，其中 $U$ 是輸入的最大整數
 
 ```c
 #include <stdio.h>
