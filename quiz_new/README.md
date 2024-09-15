@@ -20,14 +20,14 @@ $$
 
 $$
 \begin{align*}
-    &a = 10\ \overbrace{011110}^{a_3}\ \overbrace{110111}^{a_2}\ \overbrace{011110}^{a_1}\ \overbrace{110011}^{a_0} \\
+    &a = 10\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_1}\enspace\overbrace{110011}^{a_0} \\
     \Rightarrow \quad  &\tilde{a} =
-        \overbrace{000000}^{a_5}\ \overbrace{000010}^{a_4}\ \overbrace{011110}^{a_3}\ \overbrace{110111}^{a_2}\ \overbrace{011110}^{a_1}\ \overbrace{110011}^{a_0}\ \\
+        \overbrace{000000}^{a_5}\enspace\overbrace{000010}^{a_4}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_1}\enspace\overbrace{110011}^{a_0}\enspace\\
     &\tilde{a}' =
-        \overbrace{000010}^{a_4}\ \overbrace{000000}^{a_5}\   \overbrace{110111}^{a_2}\ \overbrace{011110}^{a_3}\ \overbrace{110011}^{a_0}\ \overbrace{011110}^{a_1}\ \\
+        \overbrace{000010}^{a_4}\enspace\overbrace{000000}^{a_5}\enspace  \overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110011}^{a_0}\enspace\overbrace{011110}^{a_1}\enspace\\
     &a' =
          \overbrace{00}^{a_5}\
-         \overbrace{110111}^{a_2}\ \overbrace{011110}^{a_3}\ \overbrace{110011}^{a_0}\ \overbrace{011110}^{a_1}\ \\
+         \overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110011}^{a_0}\enspace\overbrace{011110}^{a_1}\enspace\\
 \end{align*}
 $$
 
@@ -59,6 +59,7 @@ $$
 ```
 
 ### 說明
+
 ```
 10 => 1010 => 0101 => 5
 12 => 1100 => 1100 => 12
