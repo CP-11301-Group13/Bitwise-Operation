@@ -4,19 +4,19 @@
 
 給定 $N$ 個 **32 位元無號整數** $a_1, ..., a_N$ 和 $k$，請將 $a_i$ 的 bits 以 $k$ 為一組，自低位起對每兩組進行交換，將結果輸出。
 
-具體而言，考慮 $a = 00100110$，$k=2$，則分組方式為：
+具體而言，考慮 $a = 00100110$， $k=2$，則分組方式為：
 
 $$
 a = \overbrace{00}^{a_3} \enspace\overbrace{10}^{a_2} \enspace\overbrace{01}^{a_1} \enspace\overbrace{10}^{a_0}
 $$
 
-將 $a_0$ 與 $a_1$ 交換，$a_2$ 與 $a_3$ 交換，得到
+將 $a_0$ 與 $a_1$ 交換， $a_2$ 與 $a_3$ 交換，得到
 
 $$
 a' = \overbrace{10}^{a_2} \enspace\overbrace{00}^{a_3} \enspace \overbrace{10}^{a_0} \enspace\overbrace{01}^{a_1}
 $$
 
-如果 $2k$ 無法整除 $32$，則在視為 $a$ 的高位補上 $2k\cdot\left\lceil\frac{32}{2k}\right\rceil$ 個 $0$，再將交換後的結果取 $32$ 位元。例如 $k=6$：
+如果 $2k$ 無法整除 $32$，則可視為在 $a$ 的高位補上 $2k\cdot\left\lceil\frac{32}{2k}\right\rceil$ 個 $0$ 後，再將交換後的結果取 $32$ 位元。例如 $k=6$：
 
 $$
 \begin{align*}
