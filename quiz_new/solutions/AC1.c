@@ -43,8 +43,7 @@ int main() {
     };
 
     for (int i = 0; i < n; i++) {
-        unsigned int res =
-            (k > 0) ? ((arr[i] & mask_high) >> k) | ((arr[i] & mask_low) << k) : arr[i];
+        unsigned int res = ((arr[i] & mask_high) >> k) | ((arr[i] & mask_low) << k);
         printf("%u%c", res, " \n"[i == n - 1]);
     }
 }

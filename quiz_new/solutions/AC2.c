@@ -35,11 +35,6 @@ int main() {
     unsigned int mask_unit = (1 << k) - 1;
 
     for (int i = 0; i < n; i++) {
-        if (k == 0) {
-            printf("%u%c", arr[i], " \n"[i == n - 1]);
-            continue;
-        }
-
         unsigned int res = 0, origin = arr[i], mask = mask_unit;
         for (int i = 0; i < MAX_BITS; i += 2 * k) {
             unsigned int low = origin & mask;
