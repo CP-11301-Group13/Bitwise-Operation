@@ -243,7 +243,7 @@ def test_edge_k_is_zero() -> tuple[Input, Output]:
 
 # * Subtask 3
 
-@manager.trial(subtask_ids=[3, 4])
+@manager.trial(subtask_ids=3)
 def test_edge_single1() -> tuple[Input, Output]:
     return Input([1], 1), Output(arr=[2])
 
@@ -254,7 +254,7 @@ def test_edge_single2() -> tuple[Input, Output]:
 # * Subtask 4
 
 @manager.trial(subtask_ids=4)
-def test_5() -> tuple[Input, Output]:
+def test_4() -> tuple[Input, Output]:
     n = random.randint(1, 2**16)
     k = 1
     arr = [random.randint(0, 2**32 - 1) for _ in range(n)]
