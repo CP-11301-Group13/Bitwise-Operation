@@ -80,34 +80,46 @@ $$
 ## 測資
 
 共分成六個 subtasks 如下：
-### Subtask 0 (10%)
-- $0 < n \leq 100$
-- $   0\leq a_i < 2^{16}$
-- $ k = 1$
-### Subtask 1 (10%)
-- $0 < n \leq 100$
-- $   0\leq a_i < 2^{16}$
-- $ k = 2$
-### Subtask 2 (20%)
-- $0 < n \leq 4*1e5$
-- $ 0\leq a_i < 2^{32}$
-- $ k = 2$
-### Subtask 3 (20%)
-- $0 < n \leq 4*1e5$
-- $ 0\leq a_i < 2^{32}$
-- $ 1 \leq k \leq 32$
-- $ k = 2^m,\ m\in \mathbb{N}$ 
-### Subtask 4 (20%)
-- $0 < n \leq 4*1e5$
-- $ 0\leq a_i < 2^{16}$
-- $ 0 \leq k \leq 32$
-### Subtask 5 (20%)
-- $0 < n \leq 4*1e5$
-- $ 0\leq a_i < 2^{32}$
-- $ 0 \leq k \leq 32$
 
+### Subtask 0 (10%)
+
+-   $0 < n \leq 100$
+-   $0\leq a_i < 2^{16}$
+-   $k = 1$
+
+### Subtask 1 (10%)
+
+-   $0 < n \leq 100$
+-   $0\leq a_i < 2^{16}$
+-   $k = 2$
+
+### Subtask 2 (20%)
+
+-   $0 < n \leq 4*1e5$
+-   $0\leq a_i < 2^{32}$
+-   $k = 2$
+
+### Subtask 3 (20%)
+
+-   $0 < n \leq 4*1e5$
+-   $0\leq a_i < 2^{32}$
+-   $1 \leq k \leq 32$
+-   $k = 2^m,\ m\in \mathbb{N}$
+
+### Subtask 4 (20%)
+
+-   $0 < n \leq 4*1e5$
+-   $0\leq a_i < 2^{16}$
+-   $0 \leq k \leq 32$
+
+### Subtask 5 (20%)
+
+-   $0 < n \leq 4*1e5$
+-   $0\leq a_i < 2^{32}$
+-   $0 \leq k \leq 32$
 
 ## Hint
+
 請仔細注意測資條件
 
 ## Bonus
@@ -117,7 +129,7 @@ $$
 這是星球上某個遠古文明所遺留的一串密碼，你能夠解讀出其中的秘密嗎？
 
 Hint: 將密碼 base64 decode 後，每四個 bytes 組成一個 32 位元無號整數 (little endian)，並以某個 $k$ 進行本題的交換操作。至於 $k$ 要怎麼找到呢？據說解開的秘密是由 `https://` 開頭的一段文字，請根據這個線索，使用你的頭腦來暴力破解吧。
+
 ```
 hYKvBl7jZT3+6q81zyuvJm4iLzXcK289PgqvHMXLrS8k6q4mPuupPEMqiwA=
 ```
-
