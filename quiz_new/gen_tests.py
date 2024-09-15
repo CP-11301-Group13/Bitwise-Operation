@@ -36,7 +36,7 @@ from solutions.solution import (
 random.seed("CP113-1 RANDOM SEED")
 
 TIME_LIMIT = 2
-MEMORY_LIMIT = 64 << 20
+MEMORY_LIMIT = 64 << 24
 OUTPUT_LIMIT = 64 << 16
 
 
