@@ -1,6 +1,6 @@
 # Bitwise Operations
 
-Group 20
+Group 20 on NTUCOOL
 
 ## Directory Structure
 
