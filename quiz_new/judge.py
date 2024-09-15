@@ -12,7 +12,7 @@ from tempfile import TemporaryFile
 from time import sleep, time
 from typing import NamedTuple
 
-DEFAULT_FILE = str(Path(__file__).parent / "solutions/ac_code1.py")
+DEFAULT_FILE = str(Path(__file__).parent / "solutions/AC1.c")
 
 TESTS_DIR = Path(__file__).parent / "tests"
 OUTPUTS_DIR = Path(__file__).parent / "outputs"
@@ -51,6 +51,7 @@ class ProcessResult(Enum):
     NORMAL = 0
     RE = 1
     TLE = 2
+    OLE = 3
 
 
 def run(
@@ -101,6 +102,8 @@ def run_trial(filename: str, trial: Trial) -> tuple[bool, str]:
         return False, "RE"
     elif res == ProcessResult.TLE:
         return False, "TLE"
+    elif output_file.stat().st_size > ol:
+        return False, "OLE"
     else:
         is_same = compare_file(output_file, TESTS_DIR / ofn)
         if not is_same:

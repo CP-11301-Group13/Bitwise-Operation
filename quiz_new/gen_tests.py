@@ -37,7 +37,7 @@ random.seed("CP113-1 RANDOM SEED")
 
 TIME_LIMIT = 2
 MEMORY_LIMIT = 64 << 20
-OUTPUT_LIMIT = 64 << 10
+OUTPUT_LIMIT = 64 << 16
 
 
 # ---------------------------------- Helpers --------------------------------- #
@@ -67,6 +67,12 @@ WrappedTrialFunc = Callable[[], bool]
 
 TESTS_DIR = Path(__file__).parent / "tests"
 SUBTASKS_FILE = Path(__file__).parent / "subtasks.py"
+
+
+def parse_output(output: str) -> str:
+    output = output.replace("\r\n", "\n")
+    assert len(output) <= OUTPUT_LIMIT, f"Output length is {len(output)} > {OUTPUT_LIMIT}"
+    return output
 
 
 class Manager:
@@ -111,7 +117,7 @@ class Manager:
                         in_file = TESTS_DIR / f"{trial_id}.in"
                         in_file.write_text(in_str.format())
                         out_file = TESTS_DIR / f"{trial_id}.out"
-                        out_file.write_text(out_str.format())
+                        out_file.write_text((out_str.format()))
                         return True
                     except TypeError:
                         print(
