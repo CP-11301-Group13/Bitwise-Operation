@@ -1,9 +1,4 @@
-## 解法
-
-### 法一：使用 Bit masking
-
-時間複雜度：$O(QN)$
-
+### 解答(出的測資最好能夠在配分讓部分測資無法使用暴力通過)
 ```c
 #include <stdio.h>
 
@@ -16,7 +11,7 @@ int main() {
     scanf("%d", &n);  // 讀取整數 n，表示陣列大小
 
     for (int i = 0; i < n; i++) {
-        scanf("%u", &arr[i]);  // 讀取陣列元素
+        scanf("%u", &arr[i]);  // 讀取n個元素
     }
 
     // 任務1：交換奇偶位
@@ -67,39 +62,34 @@ int main() {
 
 
 ```
-
-### 法二：直接遍例每個 bit
-
-時間複雜度：$O(QN\log U)$，其中 $U$ 是輸入的最大整數
-
+暴力解法
 ```c
 #include <stdio.h>
 
 int main() {
-    int k;
-    scanf("%d", &k);
-
-    for (int t = 0; t < k; t++) {
-        int n;
-        scanf("%d", &n);
+    int n;
+    scanf("%d", &n);  // 讀取整數 n，表示陣列大小
 
     unsigned int arr[n];
     for (int i = 0; i < n; i++) {
-        scanf("%u", &arr[i]);  // 讀取陣列元素
+        scanf("%u", &arr[i]);  // 讀取n個元素
     }
 
-        for (int i = 0; i < n; i++) {
-            unsigned int N = arr[i];
-            unsigned int brute_result = 0;
-            for (int j = 0; j < 32; j += 2) {
-                unsigned int even_bit = (N >> j) & 1;
-                unsigned int odd_bit = (N >> (j + 1)) & 1;
+    // 任務1：交換奇數位和偶數位
+    for (int i = 0; i < n; i++) {
+        unsigned int N = arr[i];
+        unsigned int brute_result = 0;
 
-                // 交換位元
-                brute_result |= (even_bit << (j + 1));
-                brute_result |= (odd_bit << j);
-            }
-            printf("%u", brute_result);
+        for (int j = 0; j < 32; j += 2) {
+            unsigned int even_bit = (N >> j) & 1;      // 取出偶數位 (第 j 位)
+            unsigned int odd_bit = (N >> (j + 1)) & 1; // 取出奇數位 (第 j+1 位)
+
+            // 交換位元
+            brute_result |= (even_bit << (j + 1));  // 偶數位放到奇數位
+            brute_result |= (odd_bit << j);         // 奇數位放到偶數位
+        }
+
+        printf("%u", brute_result);
 
         if (i != n - 1) {
             printf(" ");  // 輸出空格分隔
@@ -133,3 +123,4 @@ int main() {
     return 0;
 }
 ```
+
