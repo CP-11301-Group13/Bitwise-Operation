@@ -37,7 +37,7 @@ random.seed("CP113-1 RANDOM SEED")
 
 TIME_LIMIT = 2
 MEMORY_LIMIT = 64 << 20
-OUTPUT_LIMIT = 64 << 10
+OUTPUT_LIMIT = 64 << 16
 
 
 # ---------------------------------- Helpers --------------------------------- #
@@ -67,6 +67,12 @@ WrappedTrialFunc = Callable[[], bool]
 
 TESTS_DIR = Path(__file__).parent / "tests"
 SUBTASKS_FILE = Path(__file__).parent / "subtasks.py"
+
+
+def parse_output(output: str) -> str:
+    output = output.replace("\r\n", "\n")
+    assert len(output) <= OUTPUT_LIMIT, f"Output length is {len(output)} > {OUTPUT_LIMIT}"
+    return output
 
 
 class Manager:
@@ -111,7 +117,7 @@ class Manager:
                         in_file = TESTS_DIR / f"{trial_id}.in"
                         in_file.write_text(in_str.format())
                         out_file = TESTS_DIR / f"{trial_id}.out"
-                        out_file.write_text(out_str.format())
+                        out_file.write_text(parse_output(out_str.format()))
                         return True
                     except TypeError:
                         print(
@@ -219,6 +225,7 @@ def test_sample() -> tuple[Input, Output]:
 
 # * Subtask 1
 
+
 @manager.trial(subtask_ids=1)
 def test_edge2() -> tuple[Input, Output]:
     n = 100
@@ -230,6 +237,7 @@ def test_edge2() -> tuple[Input, Output]:
 
 
 # * Subtask 2
+
 
 @manager.trial(subtask_ids=2)
 def test_edge_k_is_zero() -> tuple[Input, Output]:
@@ -243,15 +251,19 @@ def test_edge_k_is_zero() -> tuple[Input, Output]:
 
 # * Subtask 3
 
+
 @manager.trial(subtask_ids=3)
 def test_edge_single1() -> tuple[Input, Output]:
     return Input([1], 1), Output(arr=[2])
+
 
 @manager.trial(subtask_ids=3)
 def test_edge_single2() -> tuple[Input, Output]:
     return Input(arr=[1], k=2), Output(arr=[4])
 
+
 # * Subtask 4
+
 
 @manager.trial(subtask_ids=4)
 def test_4() -> tuple[Input, Output]:
@@ -261,6 +273,7 @@ def test_4() -> tuple[Input, Output]:
     res = solve(arr, k)
 
     return Input(arr, k), Output(arr=res)
+
 
 # * Subtask 5
 @manager.trial(subtask_ids=5)
