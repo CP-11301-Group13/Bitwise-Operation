@@ -1,11 +1,9 @@
-"""The solution to the quiz problem.
-Used for generating the test cases.
-The `ac_code.py` do not import this module for isolation.
+"""
+Solve the problem with bit masking.
 """
 
 from __future__ import annotations
 
-import random
 from functools import partial, reduce
 
 MAX_BITS = 32

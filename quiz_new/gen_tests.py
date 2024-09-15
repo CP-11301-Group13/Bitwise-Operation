@@ -78,8 +78,11 @@ class Manager:
         self.trial_ids: set[int] = set()
 
     def trial(
-        self, *, subtask_id: int, trial_id: int
+        self, *, subtask_id: int, trial_id: int | None = None
     ) -> Callable[[TrialFunc], WrappedTrialFunc]:
+        if trial_id is None:
+            trial_id = len(self.trial_ids)
+
         if subtask_id >= len(self.scores):
             raise ValueError("Invalid subtask_id")
         if trial_id in self.trial_ids:
@@ -169,12 +172,12 @@ SCORES = [10, 10, 20, 20, 20, 20]
 manager = Manager(scores=SCORES)
 
 """
-1. (10%) n <= 2**16, k = 1
-2. (10%) n <= 2**16, k = 2
-3. (20%) n <= 2**32, k = 2
-4. (20%) n <= 2**32, k <= 32, k = 2**m for some m
-5. (20%) n <= 2**16, 0 <= k <= 32
-6. (20%) n <= 2**32, 0 <= k <= 32
+0. (10%) n <= 2**16, k = 1
+1. (10%) n <= 2**16, k = 2
+2. (20%) n <= 2**32, k = 2
+3. (20%) n <= 2**32, k <= 32, k = 2**m for some m
+4. (20%) n <= 2**16, 0 <= k <= 32
+5. (20%) n <= 2**32, 0 <= k <= 32
 """
 
 
@@ -185,10 +188,11 @@ def solve(arr: list[int], k: int) -> list[int]:
     return res
 
 
-# * Subtask 1
+# * Subtask 0
 
 
-@manager.trial(subtask_id=1, trial_id=0)
+# if trial_id is not provided, it will be automatically assigned
+@manager.trial(subtask_id=0)
 def test_example() -> tuple[Input, Output]:
     """Example test case, should be public."""
 
@@ -199,7 +203,7 @@ def test_example() -> tuple[Input, Output]:
     return Input(arr, k), Output(arr=res)
 
 
-@manager.trial(subtask_id=1, trial_id=1)
+@manager.trial(subtask_id=0, trial_id=1)
 def test_1() -> tuple[Input, Output]:
     n = random.randint(1, 2**16)
     k = 1
