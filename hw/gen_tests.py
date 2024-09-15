@@ -1,10 +1,10 @@
 """
 Subtasks:
 
-0. (10%) 0 < n <= 100,   arr[i] < 2**8
-1. (10%) 0 < n <= 100,   arr[i] < 2**16
-2. (20%) 0 < n <= 4*1e5, arr[i] < 2**16
-3. (20%) 0 < n <= 4*1e5, arr[i] < 2**32
+0. (15%) 0 < Q <= 10,  0 < n <= 100,  arr[i] < 2**8
+1. (15%) 0 < Q <= 10,  0 < n <= 100,  arr[i] < 2**16
+2. (35%) 0 < Q <= 200, 0 < n <= 200,  arr[i] < 2**16
+3. (35%) 0 < Q <= 200, 0 < n <= 2000, arr[i] < 2**32
 
 ---
 
@@ -145,9 +145,6 @@ class Manager:
             if not suc_ids:
                 print(f"WARNING: No successful trials for subtask {subtask_id}")
 
-        # score_map_suc = {
-        #     idx: score for idx, score in score_map.items() if subtask_suc.get(idx, False)
-        # }
         expected_trial_cnt = max(len(self.trial_ids), max(self.trial_ids) + 1)
         if self.trial_ids != (expected_ids := set(range(expected_trial_cnt))):
             missing_ids = expected_ids - self.trial_ids
@@ -182,13 +179,6 @@ SCORES = [15, 15, 35, 35]
 
 manager = Manager(scores=SCORES)
 
-"""
-0. (15%) 0 < Q <= 10,  0 < n <= 100,  arr[i] < 2**8
-1. (15%) 0 < Q <= 10,  0 < n <= 100,  arr[i] < 2**16
-2. (35%) 0 < Q <= 200, 0 < n <= 200,  arr[i] < 2**16
-3. (35%) 0 < Q <= 200, 0 < n <= 2000, arr[i] < 2**32
-"""
-
 
 def solve(arrs: list[list[int]]) -> list[list[int]]:
     res = []
@@ -206,10 +196,9 @@ def solve(arrs: list[list[int]]) -> list[list[int]]:
     return res
 
 
-# * Subtask 0
+# * Subtask 0:  0 < Q <= 10,  0 < n <= 100,  arr[i] < 2**8
 
 
-# if trial_id is not provided, it will be automatically assigned
 @manager.trial(subtask_ids=0)
 def test_sample() -> tuple[Input, Output]:
     """Sample test case, should be public."""
@@ -223,7 +212,7 @@ def test_sample() -> tuple[Input, Output]:
     return Input(arrs), Output(arrs=res)
 
 
-# * Subtask 1:  0 < n <= 100,   arr[i] < 2**16
+# * Subtask 1:  0 < Q <= 10,  0 < n <= 100,  arr[i] < 2**16
 
 
 @manager.trial(subtask_ids=1)
