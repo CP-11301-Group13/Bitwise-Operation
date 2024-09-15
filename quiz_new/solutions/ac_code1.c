@@ -1,3 +1,5 @@
+// Solving with bit masking
+
 #include <stdio.h>
 
 #define MAX_N 400000
@@ -5,6 +7,7 @@
 
 unsigned int arr[MAX_N];
 
+// For debugging
 void print_bins(unsigned int x) {
     for (int i = 0; i < MAX_BITS; i++) {
         printf("%d", (x >> (MAX_BITS - 1 - i)) & 1);
@@ -33,7 +36,8 @@ int main() {
     };
 
     for (int i = 0; i < n; i++) {
-        unsigned int res = ((arr[i] & mask_high) >> k) | ((arr[i] & mask_low) << k);
+        unsigned int res =
+            (k > 0) ? ((arr[i] & mask_high) >> k) | ((arr[i] & mask_low) << k) : arr[i];
         printf("%u%c", res, " \n"[i == n - 1]);
     }
 }
