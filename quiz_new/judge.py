@@ -78,6 +78,7 @@ def run(
         while p.poll() is None:
             if time() - st - err > time_limit:
                 p.kill()
+                sleep(0.1)  # wait for the process to terminate
                 return ProcessResult.TLE
             sleep(0.1)
         return ProcessResult.NORMAL if p.returncode == 0 else ProcessResult.RE

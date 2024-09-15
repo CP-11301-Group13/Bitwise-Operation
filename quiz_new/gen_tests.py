@@ -1,14 +1,12 @@
 """
-The difficulty of testcase should be classified into 4 main levels:
+Subtasks:
 
-1. (10%) 0 <= n <= 100,   arr[i] <= 2**16, k = 1
-2. (10%) 0 <= n <= 100,   arr[i] <= 2**16, k = 2
-3. (20%) 0 <= n <= 4*1e5, arr[i] <= 2**32, k = 2
-4. (20%) 0 <= n <= 4*1e5, arr[i] <= 2**32, k <= 32, k = 2**m for some m
-5. (20%) 0 <= n <= 4*1e5, arr[i] <= 2**16, 0 <= k <= 32
-6. (20%) 0 <= n <= 4*1e5, arr[i] <= 2**32, 0 <= k <= 32
-
-For every levels, 0 <= x < 2^32
+0. (10%) 0 < n <= 100,   arr[i] < 2**16, k = 1
+1. (10%) 0 < n <= 100,   arr[i] < 2**16, k = 2
+2. (20%) 0 < n <= 4*1e5, arr[i] < 2**32, k = 2
+3. (20%) 0 < n <= 4*1e5, arr[i] < 2**32, 1 <= k <= 32, k = 2**m for some m
+4. (20%) 0 < n <= 4*1e5, arr[i] < 2**16, 0 <= k <= 32
+5. (20%) 0 < n <= 4*1e5, arr[i] < 2**32, 0 <= k <= 32
 
 ---
 
@@ -76,37 +74,53 @@ class Manager:
         self.scores = scores
         self.trial_funcs: list[dict[int, WrappedTrialFunc]] = [{} for _ in scores]
         self.trial_ids: set[int] = set()
+        self.called_trials: set[int] = set()
 
     def trial(
-        self, *, subtask_id: int, trial_id: int | None = None
-    ) -> Callable[[TrialFunc], WrappedTrialFunc]:
+        self, *, subtask_ids: int | list[int], trial_id: int | None = None
+    ) -> Callable[[TrialFunc], TrialFunc]:
+        """
+        Parameters:
+            subtask_id: index of the subtask
+            triad_id: the name of test data file, e.g. triad_id=1 => 1.in, 1.out
+        """
+
+        if isinstance(subtask_ids, int):
+            subtask_ids = [subtask_ids]
+
         if trial_id is None:
             trial_id = len(self.trial_ids)
 
-        if subtask_id >= len(self.scores):
-            raise ValueError("Invalid subtask_id")
         if trial_id in self.trial_ids:
             raise ValueError("Duplicate trial_id")
         self.trial_ids.add(trial_id)
 
-        def wrap(func: TrialFunc) -> WrappedTrialFunc:
-            def new_func():
-                try:
-                    in_str, out_str = func()
+        def wrap(func: TrialFunc) -> TrialFunc:
+            for subtask_id in subtask_ids:
+                if subtask_id >= len(self.scores):
+                    raise ValueError("Invalid subtask_id")
 
-                    in_file = TESTS_DIR / f"{trial_id}.in"
-                    in_file.write_text(in_str.format())
-                    out_file = TESTS_DIR / f"{trial_id}.out"
-                    out_file.write_text(out_str.format())
-                    return True
-                except TypeError:
-                    print(
-                        f"WARNING: Failed generating trail {func.__name__} of subtask {subtask_id}"
-                    )
-                    return False
+                def new_func():
+                    if trial_id in self.called_trials:
+                        return True
+                    self.called_trials.add(trial_id)
 
-            self.trial_funcs[subtask_id][trial_id] = new_func
-            return new_func
+                    try:
+                        in_str, out_str = func()
+
+                        in_file = TESTS_DIR / f"{trial_id}.in"
+                        in_file.write_text(in_str.format())
+                        out_file = TESTS_DIR / f"{trial_id}.out"
+                        out_file.write_text(out_str.format())
+                        return True
+                    except TypeError:
+                        print(
+                            f"WARNING: Failed generating trail {func.__name__} of subtask {subtask_id}"
+                        )
+                        return False
+
+                self.trial_funcs[subtask_id][trial_id] = new_func
+            return func
 
         return wrap
 
@@ -172,12 +186,12 @@ SCORES = [10, 10, 20, 20, 20, 20]
 manager = Manager(scores=SCORES)
 
 """
-0. (10%) n <= 2**16, k = 1
-1. (10%) n <= 2**16, k = 2
-2. (20%) n <= 2**32, k = 2
-3. (20%) n <= 2**32, k <= 32, k = 2**m for some m
-4. (20%) n <= 2**16, 0 <= k <= 32
-5. (20%) n <= 2**32, 0 <= k <= 32
+0. (10%) 0 <= n <= 100,   arr[i] < 2**16, k = 1
+1. (10%) 0 <= n <= 100,   arr[i] < 2**16, k = 2
+2. (20%) 0 <= n <= 4*1e5, arr[i] < 2**32, k = 2
+3. (20%) 0 <= n <= 4*1e5, arr[i] < 2**32, 1 <= k <= 32, k = 2**m for some m
+4. (20%) 0 <= n <= 4*1e5, arr[i] < 2**16, 0 <= k <= 32
+5. (20%) 0 <= n <= 4*1e5, arr[i] < 2**32, 0 <= k <= 32
 """
 
 
@@ -188,11 +202,11 @@ def solve(arr: list[int], k: int) -> list[int]:
     return res
 
 
-# * Subtask 0
+# * Subtask 0:  0 <= n <= 100, arr[i] <= 2**16, k = 1
 
 
 # if trial_id is not provided, it will be automatically assigned
-@manager.trial(subtask_id=0)
+@manager.trial(subtask_ids=0)
 def test_example() -> tuple[Input, Output]:
     """Example test case, should be public."""
 
@@ -203,7 +217,7 @@ def test_example() -> tuple[Input, Output]:
     return Input(arr, k), Output(arr=res)
 
 
-@manager.trial(subtask_id=0, trial_id=1)
+@manager.trial(subtask_ids=0, trial_id=1)
 def test_1() -> tuple[Input, Output]:
     n = random.randint(1, 2**16)
     k = 1
@@ -211,6 +225,47 @@ def test_1() -> tuple[Input, Output]:
     res = solve(arr, k)
 
     return Input(arr, k), Output(arr=res)
+
+
+@manager.trial(subtask_ids=0)
+def test_edge_single1() -> tuple[Input, Output]:
+    return Input([1], 1), Output(arr=[2])
+
+
+@manager.trial(subtask_ids=0)
+def test_edge2() -> tuple[Input, Output]:
+    n = 100
+    k = 1
+    arr = [(1 << 16) - random.randint(0, 2**8) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
+
+
+# * Subtask 1
+
+
+@manager.trial(subtask_ids=[1, 2, 3, 4, 5])
+def test_edge_single2() -> tuple[Input, Output]:
+    return Input(arr=[1], k=2), Output(arr=[4])
+
+
+# * Subtask 2
+# * Subtask 3
+# * Subtask 4
+
+
+@manager.trial(subtask_ids=[4, 5])
+def test_edge_k_is_zero() -> tuple[Input, Output]:
+    n = random.randint(10000, 400000)
+    k = 0
+    arr = [random.randint(0, 2**16 - 1) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
+
+
+# * Subtask 5
 
 
 # ----------------------------------- Main ----------------------------------- #

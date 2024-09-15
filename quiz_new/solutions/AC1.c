@@ -24,6 +24,13 @@ int main() {
         scanf("%u", &arr[i]);
     }
 
+    if (k == 0) {
+        for (int i = 0; i < n; i++) {
+            printf("%u%c", arr[i], " \n"[i == n - 1]);
+        }
+        return 0;
+    }
+
     unsigned int mask_unit = (1 << k) - 1;
     unsigned int mask_low = 0, mask_high = 0;
 

@@ -3,7 +3,6 @@
 
 import sys
 
-# why not `str.rstrip`?
 def rstrip(s):
 	while s and (s[-1] == '\r' or s[-1] == '\n'): s = s[:-1]
 	return s
