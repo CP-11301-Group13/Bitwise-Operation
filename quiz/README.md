@@ -116,7 +116,7 @@ $$
 
 這是星球上某個遠古文明所遺留的一串密碼，你能夠解讀出其中的秘密嗎？
 
-Hint: 將密碼 base64 decode 後，每四個 bytes 組成一個 32 位元無號整數，並以某個 $k$ 進行本題的交換操作。至於 $k$ 要怎麼找到，就要靠你的智慧了。
+Hint: 將密碼 base64 decode 後，每四個 bytes 組成一個 32 位元無號整數 (little endian)，並以某個 $k$ 進行本題的交換操作。至於 $k$ 要怎麼找到呢？據說解開的秘密是由 `https://` 開頭的一段文字，請根據這個線索，使用你的頭腦來暴力破解吧。
 ```
 hYKvBl7jZT3+6q81zyuvJm4iLzXcK289PgqvHMXLrS8k6q4mPuupPEMqiwA=
 ```
