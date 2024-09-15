@@ -37,7 +37,7 @@ random.seed("CP113-1 RANDOM SEED")
 
 TIME_LIMIT = 2
 MEMORY_LIMIT = 64 << 20
-OUTPUT_LIMIT = 64 << 16
+OUTPUT_LIMIT = 64 << 10
 
 
 # ---------------------------------- Helpers --------------------------------- #
@@ -67,12 +67,6 @@ WrappedTrialFunc = Callable[[], bool]
 
 TESTS_DIR = Path(__file__).parent / "tests"
 SUBTASKS_FILE = Path(__file__).parent / "subtasks.py"
-
-
-def parse_output(output: str) -> str:
-    output = output.replace("\r\n", "\n")
-    assert len(output) <= OUTPUT_LIMIT, f"Output length is {len(output)} > {OUTPUT_LIMIT}"
-    return output
 
 
 class Manager:
@@ -117,7 +111,7 @@ class Manager:
                         in_file = TESTS_DIR / f"{trial_id}.in"
                         in_file.write_text(in_str.format())
                         out_file = TESTS_DIR / f"{trial_id}.out"
-                        out_file.write_text((out_str.format()))
+                        out_file.write_text(out_str.format())
                         return True
                     except TypeError:
                         print(
@@ -212,7 +206,7 @@ def solve(arr: list[int], k: int) -> list[int]:
 
 
 # if trial_id is not provided, it will be automatically assigned
-@manager.trial(subtask_ids=0)
+@manager.trial(subtask_ids=0, trial_id=0)
 def test_sample() -> tuple[Input, Output]:
     """Sample test case, should be public."""
 
@@ -223,22 +217,9 @@ def test_sample() -> tuple[Input, Output]:
     return Input(arr, k), Output(arr=res)
 
 
-@manager.trial(subtask_ids=0, trial_id=1)
-def test_1() -> tuple[Input, Output]:
-    n = random.randint(1, 2**16)
-    k = 1
-    arr = [random.randint(0, 2**32 - 1) for _ in range(n)]
-    res = solve(arr, k)
+# * Subtask 1
 
-    return Input(arr, k), Output(arr=res)
-
-
-@manager.trial(subtask_ids=0)
-def test_edge_single1() -> tuple[Input, Output]:
-    return Input([1], 1), Output(arr=[2])
-
-
-@manager.trial(subtask_ids=0)
+@manager.trial(subtask_ids=1)
 def test_edge2() -> tuple[Input, Output]:
     n = 100
     k = 1
@@ -248,20 +229,9 @@ def test_edge2() -> tuple[Input, Output]:
     return Input(arr, k), Output(arr=res)
 
 
-# * Subtask 1
-
-
-@manager.trial(subtask_ids=[1, 2, 3, 4, 5])
-def test_edge_single2() -> tuple[Input, Output]:
-    return Input(arr=[1], k=2), Output(arr=[4])
-
-
 # * Subtask 2
-# * Subtask 3
-# * Subtask 4
 
-
-@manager.trial(subtask_ids=[4, 5])
+@manager.trial(subtask_ids=2)
 def test_edge_k_is_zero() -> tuple[Input, Output]:
     n = random.randint(10000, 400000)
     k = 0
@@ -271,7 +241,36 @@ def test_edge_k_is_zero() -> tuple[Input, Output]:
     return Input(arr, k), Output(arr=res)
 
 
+# * Subtask 3
+
+@manager.trial(subtask_ids=[3, 4])
+def test_edge_single1() -> tuple[Input, Output]:
+    return Input([1], 1), Output(arr=[2])
+
+@manager.trial(subtask_ids=3)
+def test_edge_single2() -> tuple[Input, Output]:
+    return Input(arr=[1], k=2), Output(arr=[4])
+
+# * Subtask 4
+
+@manager.trial(subtask_ids=4)
+def test_5() -> tuple[Input, Output]:
+    n = random.randint(1, 2**16)
+    k = 1
+    arr = [random.randint(0, 2**32 - 1) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
+
 # * Subtask 5
+@manager.trial(subtask_ids=5)
+def test_5() -> tuple[Input, Output]:
+    n = random.randint(1, 2**16)
+    k = 1
+    arr = [random.randint(0, 2**32 - 1) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
 
 
 # ----------------------------------- Main ----------------------------------- #
