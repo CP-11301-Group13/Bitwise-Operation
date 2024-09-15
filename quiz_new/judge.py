@@ -1,7 +1,6 @@
 """This script is only used for local testing. It is not used in the online judge."""
 
 import argparse
-import os
 import shutil
 import subprocess
 import sys
@@ -13,10 +12,7 @@ from tempfile import TemporaryFile
 from time import sleep, time
 from typing import NamedTuple
 
-# c = 'python3 -B AC_Code.py'
-# c = "python -B AC_Code.py"
-# c = "1189.exe"
-DEFAULT_FILE = str(Path(__file__).parent / "solutions/ac_code.py")
+DEFAULT_FILE = str(Path(__file__).parent / "solutions/ac_code1.py")
 
 TESTS_DIR = Path(__file__).parent / "tests"
 OUTPUTS_DIR = Path(__file__).parent / "outputs"
@@ -160,12 +156,12 @@ def run_subtasks(filename: str, trial_ids: list[int]):
 
 def main():
     parser = argparse.ArgumentParser(
-        prog="ProgramName",
+        prog="Local Judge",
         description="What the program does",
         epilog="Text at the bottom of help",
     )
 
-    parser.add_argument("filename", help="Program file to run")
+    parser.add_argument("filename", nargs="?", default=DEFAULT_FILE, help="Program file to run")
     parser.add_argument("trial_ids", nargs="*", type=int, help="Test ids to run")
 
     args = parser.parse_args()
