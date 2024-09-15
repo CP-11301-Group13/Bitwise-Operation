@@ -1,14 +1,17 @@
 """This script is only used for local testing. It is not used in the online judge."""
 
+from __future__ import annotations
+
 import argparse
 import shutil
 import subprocess
 import sys
 from dataclasses import dataclass
 from enum import Enum
+from functools import lru_cache
 from os import PathLike
 from pathlib import Path
-from tempfile import TemporaryFile
+from tempfile import NamedTemporaryFile
 from time import sleep, time
 from typing import NamedTuple
 
@@ -54,6 +57,19 @@ class ProcessResult(Enum):
     OLE = 3
 
 
+tmp_compiled_exe = None
+
+
+@lru_cache
+def get_compiled_exe(filename: str) -> str:
+    # set to global to prevent gc
+    global tmp_compiled_exe
+    tmp_compiled_exe = NamedTemporaryFile("w+b", suffix=".exe", delete=False)
+    subprocess.check_output(["gcc", filename, "-o", tmp_compiled_exe.name])
+    tmp_compiled_exe.close()
+    return tmp_compiled_exe.name
+
+
 def run(
     *,
     filename: str = DEFAULT_FILE,
@@ -64,10 +80,7 @@ def run(
     if filename.endswith(".py"):
         cmd = [sys.executable, filename]
     elif filename.endswith(".c"):
-        tmp_exe = TemporaryFile("w+b", suffix=".exe", delete_on_close=False)
-        subprocess.check_output(f"gcc {filename} -o {tmp_exe.name}")
-        tmp_exe.close()
-        cmd = tmp_exe.name
+        cmd = get_compiled_exe(filename)
     else:
         cmd = filename
 
@@ -82,6 +95,7 @@ def run(
                 sleep(0.1)  # wait for the process to terminate
                 return ProcessResult.TLE
             sleep(0.1)
+
         return ProcessResult.NORMAL if p.returncode == 0 else ProcessResult.RE
 
 
