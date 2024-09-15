@@ -7,13 +7,13 @@
 具體而言，考慮 $a = 00100110$，$k=2$，則分組方式為：
 
 $$
-a = \overbrace{00}^{a_3} \overbrace{10}^{a_2} \overbrace{01}^{a_1} \overbrace{10}^{a_0}
+a = \overbrace{00}^{a_3} \enspace\overbrace{10}^{a_2} \enspace\overbrace{01}^{a_1} \enspace\overbrace{10}^{a_0}
 $$
 
 將 $a_0$ 與 $a_1$ 交換，$a_2$ 與 $a_3$ 交換，得到
 
 $$
-a' = \overbrace{10}^{a_2} \overbrace{00}^{a_3}  \overbrace{10}^{a_0} \overbrace{01}^{a_1}
+a' = \overbrace{10}^{a_2} \enspace\overbrace{00}^{a_3} \enspace \overbrace{10}^{a_0} \enspace\overbrace{01}^{a_1}
 $$
 
 如果 $2k$ 無法整除 $32$，則在視為 $a$ 的高位補上 $2k\cdot\left\lceil\frac{32}{2k}\right\rceil$ 個 $0$，再將交換後的結果取 $32$ 位元。例如 $k=6$：
@@ -26,7 +26,7 @@ $$
     &\tilde{a}' =
         \overbrace{000010}^{a_4}\enspace\overbrace{000000}^{a_5}\enspace  \overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110011}^{a_0}\enspace\overbrace{011110}^{a_1}\enspace\\
     &a' =
-         \overbrace{00}^{a_5}\
+         \overbrace{00}^{a_5} \enspace
          \overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110011}^{a_0}\enspace\overbrace{011110}^{a_1}\enspace\\
 \end{align*}
 $$
