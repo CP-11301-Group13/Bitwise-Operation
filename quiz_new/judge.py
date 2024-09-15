@@ -54,7 +54,6 @@ class ProcessResult(Enum):
     NORMAL = 0
     RE = 1
     TLE = 2
-    OLE = 3
 
 
 tmp_compiled_exe = None
@@ -76,6 +75,7 @@ def run(
     input_file: PathLike | str,
     output_file: PathLike | str,
     time_limit: int,
+    memory_limit: int,
 ) -> ProcessResult:
     if filename.endswith(".py"):
         cmd = [sys.executable, filename]
@@ -85,7 +85,9 @@ def run(
         cmd = filename
 
     with open(input_file, "r") as f_in, open(output_file, "+w") as f_out:
-        p = subprocess.Popen(cmd, stdin=f_in, stdout=f_out)
+        # if platform.system() == "Linux":
+        #     cmd = f"ulimit -v {1000};" + (cmd if isinstance(cmd, str) else " ".join(cmd))
+        p = subprocess.Popen(cmd, stdin=f_in, stdout=f_out, stderr=subprocess.PIPE, shell=True)
 
         err = 0.3
         st = time()
@@ -111,6 +113,7 @@ def run_trial(filename: str, trial: Trial) -> tuple[bool, str]:
         input_file=TESTS_DIR / ifn,
         output_file=output_file,
         time_limit=tl,
+        memory_limit=ml,
     )
     if res == ProcessResult.RE:
         return False, "RE"
