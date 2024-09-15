@@ -15,9 +15,11 @@ def ceil_div(x: int, a: int):
 
 
 def swap_k_groups(x: int, k: int) -> int:
-    assert 0 <= x < 2**MAX_BITS and 0 <= k < MAX_BITS
+    assert 0 <= x < 2**MAX_BITS and 0 <= k <= MAX_BITS
     if k == 0:
         return x
+    if k == MAX_BITS:
+        return 0
 
     overflow_mask = (1 << 32) - 1
 
@@ -25,10 +27,7 @@ def swap_k_groups(x: int, k: int) -> int:
 
     mask_low = reduce(
         lambda x, y: x | y,
-        [
-            (mask_unit << 2 * i * k) & overflow_mask
-            for i in range(ceil_div(MAX_BITS, (k * 2)))
-        ],
+        [(mask_unit << 2 * i * k) & overflow_mask for i in range(ceil_div(MAX_BITS, (k * 2)))],
     )
     mask_high = reduce(
         lambda x, y: x | y,

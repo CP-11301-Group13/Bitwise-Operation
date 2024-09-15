@@ -24,6 +24,13 @@ int main() {
         scanf("%u", &arr[i]);
     }
 
+    if (k == 32) {
+        for (int i = 0; i < n; i++) {
+            printf("0%c", " \n"[i == n - 1]);
+        }
+        return 0;
+    }
+
     unsigned int mask_unit = (1 << k) - 1;
     unsigned int mask_low = 0, mask_high = 0;
 
@@ -36,9 +43,7 @@ int main() {
     };
 
     for (int i = 0; i < n; i++) {
-        unsigned int res =
-            (k > 0) ? ((arr[i] & mask_high) >> k) | ((arr[i] & mask_low) << k) : arr[i];
-        printf("%u ", res);
+        unsigned int res = ((arr[i] & mask_high) >> k) | ((arr[i] & mask_low) << k);
+        printf("%u%c", res, " \n"[i == n - 1]);
     }
-    printf("\n");
 }

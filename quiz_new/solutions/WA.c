@@ -1,9 +1,9 @@
-// Solving with direct bit manipulation
+// This solution tries to handle k=32, but the workaround is incorrect.
+// It's just not safe to do bit shifting by 32, as it's undefined behavior.
 
 #include <stdio.h>
 
 #define MAX_N 400000
-#define MAX_K 32
 #define MAX_BITS 32
 
 unsigned int arr[MAX_N];
@@ -31,26 +31,15 @@ int main() {
         }
         return 0;
     }
-    if (k == 32) {
-        for (int i = 0; i < n; i++) {
-            printf("0%c", " \n"[i == n - 1]);
-        }
-        return 0;
-    }
 
-    unsigned int mask_unit = (1 << k) - 1;
+    unsigned int mask_unit = k < MAX_BITS ? (1 << k) - 1 : ~0u;
+    unsigned int mask_low = 0, mask_high = 0;
+
+    for (int i = 0; 2 * i * k < MAX_BITS; i++) mask_low |= mask_unit << 2 * i * k;
+    for (int i = 0; (2 * i + 1) * k < MAX_BITS; i++) mask_high |= mask_unit << (2 * i + 1) * k;
 
     for (int i = 0; i < n; i++) {
-        unsigned int res = 0, origin = arr[i], mask = mask_unit;
-        for (int i = 0; i < MAX_BITS; i += 2 * k) {
-            unsigned int low = origin & mask;
-            mask <<= k;
-            unsigned int high = origin & mask;
-            mask <<= k;
-            res |= (low << k) | (high >> k);
-        }
-        // print_bins(arr[i]);
-        // print_bins(res);
+        unsigned int res = ((arr[i] & mask_high) >> k) | ((arr[i] & mask_low) << k);
         printf("%u%c", res, " \n"[i == n - 1]);
     }
 }

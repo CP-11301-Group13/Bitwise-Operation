@@ -21,7 +21,7 @@ import json
 import random
 import shutil
 from dataclasses import dataclass
-from functools import partial
+from functools import partial, wraps
 from pathlib import Path
 from time import time
 from typing import Callable
@@ -106,6 +106,7 @@ class Manager:
                 if subtask_id >= len(self.scores):
                     raise ValueError("Invalid subtask_id")
 
+                @wraps(func)
                 def new_func():
                     if trial_id in self.called_trials:
                         return True
@@ -119,10 +120,11 @@ class Manager:
                         out_file = TESTS_DIR / f"{trial_id}.out"
                         out_file.write_text(parse_output(out_str.format()))
                         return True
-                    except TypeError:
+                    except TypeError as e:
                         print(
-                            f"WARNING: Failed generating trail {func.__name__} of subtask {subtask_id}"
+                            f"WARNING: Failed generating trail {func.__name__} of subtask {subtask_id}; trial_id {trial_id}."
                         )
+                        print("Error:", e)
                         return False
 
                 self.trial_funcs[subtask_id][trial_id] = new_func
@@ -146,9 +148,10 @@ class Manager:
                 if func():
                     suc_ids.append(trial_id)
                 else:
-                    print(f"WARNING: Trial {trial_id} failed")
-                if time() - st > TIME_LIMIT:
-                    print(f"WARNING: Trial {trial_id} is too slow")
+                    # print(f"WARNING: Trial {trial_id} failed")
+                    pass
+                if time() - st > TIME_LIMIT * 2:  # double because we solve with two methods
+                    print(f"WARNING: Trial {trial_id} is too slow. (function: {func.__name__})")
 
             subtask_trial_ids.append(suc_ids)
             if not suc_ids:
@@ -191,15 +194,6 @@ SCORES = [10, 10, 20, 20, 20, 20]
 
 manager = Manager(scores=SCORES)
 
-"""
-0. (10%) 0 <= n <= 100,   arr[i] < 2**16, k = 1
-1. (10%) 0 <= n <= 100,   arr[i] < 2**16, k = 2
-2. (20%) 0 <= n <= 4*1e5, arr[i] < 2**32, k = 2
-3. (20%) 0 <= n <= 4*1e5, arr[i] < 2**32, 1 <= k <= 32, k = 2**m for some m
-4. (20%) 0 <= n <= 4*1e5, arr[i] < 2**16, 0 <= k <= 32
-5. (20%) 0 <= n <= 4*1e5, arr[i] < 2**32, 0 <= k <= 32
-"""
-
 
 def solve(arr: list[int], k: int) -> list[int]:
     res = list(map(partial(swap_k_groups, k=k), arr))
@@ -212,7 +206,7 @@ def solve(arr: list[int], k: int) -> list[int]:
 
 
 # if trial_id is not provided, it will be automatically assigned
-@manager.trial(subtask_ids=0, trial_id=0)
+@manager.trial(subtask_ids=0)
 def test_sample() -> tuple[Input, Output]:
     """Sample test case, should be public."""
 
@@ -223,11 +217,18 @@ def test_sample() -> tuple[Input, Output]:
     return Input(arr, k), Output(arr=res)
 
 
-# * Subtask 1
+@manager.trial(subtask_ids=0)
+def test_sub0() -> tuple[Input, Output]:
+    n = random.randint(30, 100)
+    k = 1
+    arr = [random.randint(2**8, 2**16 - 1) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
 
 
-@manager.trial(subtask_ids=1)
-def test_edge2() -> tuple[Input, Output]:
+@manager.trial(subtask_ids=0)
+def test_edge1() -> tuple[Input, Output]:
     n = 100
     k = 1
     arr = [(1 << 16) - random.randint(0, 2**8) for _ in range(n)]
@@ -236,10 +237,69 @@ def test_edge2() -> tuple[Input, Output]:
     return Input(arr, k), Output(arr=res)
 
 
-# * Subtask 2
+# * Subtask 1:  0 <= n <= 100,   arr[i] < 2**16, k = 2
+
+
+@manager.trial(subtask_ids=1)
+def test_sub1() -> tuple[Input, Output]:
+    n = random.randint(30, 100)
+    k = 2
+    arr = [random.randint(2**8, 2**16) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
+
+
+@manager.trial(subtask_ids=1)
+def test_edge2() -> tuple[Input, Output]:
+    n = 100
+    k = 2
+    arr = [(1 << 16) - random.randint(0, 2**8) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
+
+
+# * Subtask 2:  0 <= n <= 4*1e5, arr[i] < 2**32, k = 2
 
 
 @manager.trial(subtask_ids=2)
+def test_sub2() -> tuple[Input, Output]:
+    n = random.randint(10000, 400000)
+    k = 2
+    arr = [random.randint(2**16, 2**32) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
+
+
+# * Subtask 3:  0 <= n <= 4*1e5, arr[i] < 2**32, 1 <= k <= 32, k = 2**m for some m
+
+
+@manager.trial(subtask_ids=[3, 4, 5])
+def test_edge_k_is_32() -> tuple[Input, Output]:
+    n = random.randint(10000, 400000)
+    k = 32
+    arr = [random.randint(0, 2**16 - 1) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
+
+
+@manager.trial(subtask_ids=3)
+def test_sub3() -> tuple[Input, Output]:
+    n = random.randint(10000, 400000)
+    k = 2 ** random.randint(0, 5)
+    arr = [random.randint(2**16, 2**32) for _ in range(n)]
+    res = solve(arr, k)
+
+    return Input(arr, k), Output(arr=res)
+
+
+# * Subtask 4:  0 <= n <= 4*1e5, arr[i] < 2**16, 0 <= k <= 32
+
+
+@manager.trial(subtask_ids=[4, 5])
 def test_edge_k_is_zero() -> tuple[Input, Output]:
     n = random.randint(10000, 400000)
     k = 0
@@ -249,38 +309,24 @@ def test_edge_k_is_zero() -> tuple[Input, Output]:
     return Input(arr, k), Output(arr=res)
 
 
-# * Subtask 3
-
-
-@manager.trial(subtask_ids=3)
-def test_edge_single1() -> tuple[Input, Output]:
-    return Input([1], 1), Output(arr=[2])
-
-
-@manager.trial(subtask_ids=3)
-def test_edge_single2() -> tuple[Input, Output]:
-    return Input(arr=[1], k=2), Output(arr=[4])
-
-
-# * Subtask 4
-
-
 @manager.trial(subtask_ids=4)
-def test_4() -> tuple[Input, Output]:
-    n = random.randint(1, 2**16)
-    k = 1
-    arr = [random.randint(0, 2**32 - 1) for _ in range(n)]
+def test_sub4() -> tuple[Input, Output]:
+    n = random.randint(10000, 400000)
+    k = random.randint(0, 32)
+    arr = [random.randint(2**8, 2**16) for _ in range(n)]
     res = solve(arr, k)
 
     return Input(arr, k), Output(arr=res)
 
 
-# * Subtask 5
+# * Subtask 5:  0 <= n <= 4*1e5, arr[i] < 2**32, 0 <= k <= 32
+
+
 @manager.trial(subtask_ids=5)
-def test_5() -> tuple[Input, Output]:
-    n = random.randint(1, 2**16)
-    k = 1
-    arr = [random.randint(0, 2**32 - 1) for _ in range(n)]
+def test_sub5() -> tuple[Input, Output]:
+    n = random.randint(10000, 400000)
+    k = random.randint(0, 31)
+    arr = [random.randint(2**16, 2**32) for _ in range(n)]
     res = solve(arr, k)
 
     return Input(arr, k), Output(arr=res)
