@@ -82,28 +82,28 @@ $$
 共分成六個 subtasks 如下：
 ### Subtask 0 (10%)
 - $0 < n \leq 100$
-- $   0\leq arr[i] < 2^{16}$
+- $   0\leq a_i < 2^{16}$
 - $ k = 1$
 ### Subtask 1 (10%)
 - $0 < n \leq 100$
-- $   0\leq arr[i] < 2^{16}$
+- $   0\leq a_i < 2^{16}$
 - $ k = 2$
 ### Subtask 2 (20%)
 - $0 < n \leq 4*1e5$
-- $ 0\leq arr[i] < 2^{32}$
+- $ 0\leq a_i < 2^{32}$
 - $ k = 2$
 ### Subtask 3 (20%)
 - $0 < n \leq 4*1e5$
-- $ 0\leq arr[i] < 2^{32}$
+- $ 0\leq a_i < 2^{32}$
 - $ 1 \leq k \leq 32$
 - $ k = 2^m,\ m\in \mathbb{N}$ 
 ### Subtask 4 (20%)
 - $0 < n \leq 4*1e5$
-- $ 0\leq arr[i] < 2^{16}$
+- $ 0\leq a_i < 2^{16}$
 - $ 0 \leq k \leq 32$
 ### Subtask 5 (20%)
 - $0 < n \leq 4*1e5$
-- $ 0\leq arr[i] < 2^{32}$
+- $ 0\leq a_i < 2^{32}$
 - $ 0 \leq k \leq 32$
 
 
