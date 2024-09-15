@@ -1,16 +1,25 @@
 ## 說明
-
+給定一個陣列，對於裡面的每個元素，請你交換其每個元素的二進制表示中的奇數位和偶數位。也就是說，位於偶數位置的bit（第`0`位、第`2`位、……）與位於奇數位置的bit（第`1`位、第`3`位、……）互換,即第`0`位跟第`1`位互換....第`30`位跟第`31`位互換。請把陣列中的每個元素做交換後輸出交換後的陣列
 
 ## Input Format 
-
+第一行輸入一個整數`k`，表示有`k`組測試資料。
+對於每組測試資料，先輸入一個整數`n`，表示該測試資料中的陣列大小。
 
 ## Output Format
-
-
+輸入`n`個整數，表示該測試資料的陣列元素。
 ## Sample Input
-
-
+3   
+3   
+23 43 0   
+4   
+1 2 3 4   
+2   
+4294967295 0   
 ## Sample Output
-
-
+43 23 0  
+2 1 3 8   
+4294967295 0   
 ## Hint
+1.Use the bit masking trick.
+2.How you can extract the odd bit and even bit by multiplying some integer.
+3.Then you do some bit shifting.
