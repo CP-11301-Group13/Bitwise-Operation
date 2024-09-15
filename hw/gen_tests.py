@@ -56,6 +56,7 @@ TrialFunc = Callable[[], tuple[Input, Output]]
 WrappedTrialFunc = Callable[[], bool]
 
 
+CUR_DIR = Path(__file__).parent
 TESTS_DIR = Path(__file__).parent / "tests"
 SUBTASKS_FILE = Path(__file__).parent / "subtasks.py"
 
@@ -122,6 +123,10 @@ class Manager:
         return wrap
 
     def gen_subtasks(self, *idxs: int):
+        for file in CUR_DIR.glob("*.in"):
+            file.unlink()
+        for file in CUR_DIR.glob("*.out"):
+            file.unlink()
         shutil.rmtree(TESTS_DIR, ignore_errors=True)
         TESTS_DIR.mkdir()
 
@@ -171,6 +176,9 @@ class Manager:
             ]
             # we should manual format the file
             json.dump(subtasks_spec, f)
+        for file in TESTS_DIR.iterdir():
+            file.rename(CUR_DIR / file.name)
+        TESTS_DIR.rmdir()
 
 
 # --------------------------------- Subtasks --------------------------------- #

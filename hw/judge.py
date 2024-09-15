@@ -17,7 +17,8 @@ from typing import NamedTuple
 
 DEFAULT_FILE = str(Path(__file__).parent / "solutions/AC1.c")
 
-TESTS_DIR = Path(__file__).parent / "tests"
+# TESTS_DIR = Path(__file__).parent / "tests"
+TESTS_DIR = Path(__file__).parent 
 OUTPUTS_DIR = Path(__file__).parent / "outputs"
 SUBTASKS_FILE = Path(__file__).parent / "subtasks.py"
 
