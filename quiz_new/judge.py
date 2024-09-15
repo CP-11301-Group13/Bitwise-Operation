@@ -1,6 +1,7 @@
 """This script is only used for local testing. It is not used in the online judge."""
 
 import argparse
+import os
 import shutil
 import subprocess
 import sys
@@ -8,6 +9,7 @@ from dataclasses import dataclass
 from enum import Enum
 from os import PathLike
 from pathlib import Path
+from tempfile import TemporaryFile
 from time import sleep, time
 from typing import NamedTuple
 
@@ -64,8 +66,13 @@ def run(
 ) -> ProcessResult:
     if filename.endswith(".py"):
         cmd = [sys.executable, filename]
+    elif filename.endswith(".c"):
+        tmp_exe = TemporaryFile("w+b", suffix=".exe", delete_on_close=False)
+        subprocess.check_output(f"gcc {filename} -o {tmp_exe.name}")
+        tmp_exe.close()
+        cmd = tmp_exe.name
     else:
-        raise ValueError("Invalid file type")
+        cmd = filename
 
     with open(input_file, "r") as f_in, open(output_file, "+w") as f_out:
         p = subprocess.Popen(cmd, stdin=f_in, stdout=f_out)
