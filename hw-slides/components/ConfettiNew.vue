@@ -2,17 +2,16 @@
 import _confetti from "https://cdn.skypack.dev/canvas-confetti";
 
 const confetti = (args) => {
-    if (!targetIsVisible.value) return;
+    // if (!targetIsVisible.value) return;
 
     _confetti(args);
 };
 
 import { ref, onMounted } from "vue";
-import { useElementVisibility } from '@vueuse/core'
+import { useElementVisibility } from "@vueuse/core";
 
 const target = ref(null);
 const targetIsVisible = useElementVisibility(target);
-
 
 const options = {
     ticks: 200,
@@ -62,12 +61,19 @@ const func = () => {
             ...options,
         });
     }, 1500);
-};
 
-func();
-setInterval(() => {
-    func();
-}, 5000);
+    let dispatched = false;
+    const dispatch = () => {
+        if (!dispatched && targetIsVisible.value) {
+            dispatched = true;
+
+            func();
+            setInterval(() => {
+                func();
+            }, 3500);
+        }
+    };
+};
 </script>
 
 <template>

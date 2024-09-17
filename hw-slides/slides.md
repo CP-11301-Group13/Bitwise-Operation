@@ -188,7 +188,6 @@ for i in range(?):
 <span v-click='11'></span>
 
 ---
-
 layout: two-cols
 layoutClass: gap-16
 
@@ -215,7 +214,7 @@ for i in range(?):
   mask2 = mask2 << ??
 ```
 
-```py {*|2,3,4,5|7|*}
+```py {*|3,4,5,6|8|*}
 x = int(input())
 
 mask1 = 0b010101
@@ -319,8 +318,6 @@ res = (bits1 << 1) | (bits2 >> 1)
 | $2^3$ | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 1   | 1   | 1   | 1   | 1   | 1   | 1   | 1   |
 
 ---
-
-class: text-center
 layout: center
 
 # vertically center?
