@@ -215,7 +215,7 @@ for i in range(?):
   mask2 = mask2 << ??
 ```
 
-```py
+```py {*|2,3,4,5|7|*}
 x = int(input())
 
 mask1 = 0b010101
