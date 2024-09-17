@@ -61,19 +61,23 @@ const func = () => {
             ...options,
         });
     }, 1500);
-
-    let dispatched = false;
-    const dispatch = () => {
-        if (!dispatched && targetIsVisible.value) {
-            dispatched = true;
-
-            func();
-            setInterval(() => {
-                func();
-            }, 3500);
-        }
-    };
 };
+
+let dispatched = false;
+const dispatch = () => {
+    if (!dispatched && targetIsVisible.value) {
+        dispatched = true;
+
+        func();
+        setInterval(() => {
+            func();
+        }, 3500);
+    } else if(!dispatched) {
+        requestAnimationFrame(dispatch);
+    }
+};
+dispatch();
+requestAnimationFrame(dispatch);
 </script>
 
 <template>
