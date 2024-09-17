@@ -1,0 +1,1 @@
+@keyframes marquee{0%{transform:translate(calc(-33% - 14px))}to{transform:translate(0)}}:root{--duration: 12s}
