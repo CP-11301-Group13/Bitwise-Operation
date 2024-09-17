@@ -100,11 +100,9 @@ mdc: true
 | 63   | 1   | 1   | 1   | 1   | 1   | 0   | ➡   | 1   | 1   | 1   | 1   | 0   | 1   | 62   |
 
 ---
-
 layout: two-cols
 layoutClass: gap-16
 transition: none
-
 ---
 
 # Solution (1)
