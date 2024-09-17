@@ -37,21 +37,21 @@ mdc: true
 
 <div class="fixed left-0 bottom-0 w-[100%] h-[100vh] overflow-hidden h-fit-content">
 <div style='animation: marquee var(--duration) linear infinite;' class='absolute bottom-5 [&>*]:flex-1 [&>*]:text-nowrap	 left-0  flex mr-5 gap-5 items-center'>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B10401006 洪愷希</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B12505047 陳澤諒</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B11801005 何宗蕘</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">R13944053 温文安</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B12902090 張玉慧</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B10401006 洪愷希</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B12505047 陳澤諒</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B11801005 何宗蕘</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">R13944053 温文安</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B12902090 張玉慧</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B10401006 洪愷希</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B12505047 陳澤諒</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B11801005 何宗蕘</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">R13944053 温文安</kbd>
-  <kbd style="font-size: 1rem; line-height:1.35rem;">B12902090 張玉慧</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--green)">B10401006 洪愷希</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--comment)">B12505047 陳澤諒</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--orange)">B11801005 何宗蕘</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--pink)">R13944053 温文安</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--red)">B12902090 張玉慧</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--green)">B10401006 洪愷希</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--comment)">B12505047 陳澤諒</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--orange)">B11801005 何宗蕘</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--pink)">R13944053 温文安</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--red)">B12902090 張玉慧</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--green)">B10401006 洪愷希</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--comment)">B12505047 陳澤諒</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--orange)">B11801005 何宗蕘</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--pink)">R13944053 温文安</kbd>
+  <kbd style="font-size: 1rem; line-height:1.35rem; color: var(--red)">B12902090 張玉慧</kbd>
 </div>
 </div>
 
@@ -100,9 +100,11 @@ mdc: true
 | 63   | 1   | 1   | 1   | 1   | 1   | 0   | ➡   | 1   | 1   | 1   | 1   | 0   | 1   | 62   |
 
 ---
+
 layout: two-cols
 layoutClass: gap-16
 transition: none
+
 ---
 
 # Solution (1)
@@ -161,7 +163,6 @@ for i in range(?):
   <span v-motion :initial="{ x: 0 }" :enter="{ opacity: 1}" :click-7="{ x: -64 } " :leave="{ opacity: 0.5}" >1</span>
 </div>
 
-
 <div
   class="container bg-[var(--comment)] w-min px-2 py-px rounded-xl"
   style="font-size: 12px;"
@@ -188,10 +189,11 @@ for i in range(?):
 
 <span v-click='11'></span>
 
-
 ---
+
 layout: two-cols
 layoutClass: gap-16
+
 ---
 
 <h1 v-if="$clicks<=7">Solution (1)</h1>
@@ -200,7 +202,7 @@ layoutClass: gap-16
 Pseudocode 😃
 
 ````md magic-move {lines: true, at: 8}
-```py 
+```py
 x = int(input())
 
 res = 0
@@ -229,7 +231,6 @@ res = (bits1 << 1) | (bits2 >> 1)
 
 ::right::
 
-
 <style>
   div.container {
     display: flex;
@@ -247,10 +248,9 @@ res = (bits1 << 1) | (bits2 >> 1)
   }
 </style>
 
-
 <v-clicks hide at="7" depth="2" every="10">
 
-  ## Example: 13
+## Example: 13
 
   <div
     class="container mt-32px"
@@ -262,7 +262,6 @@ res = (bits1 << 1) | (bits2 >> 1)
     <span v-motion :initial="{ x: 0 }" :click-2="{ x: 64 }">0</span>
     <span v-motion :initial="{ x: 0 }" :click-2="{ x: -64 }">1</span>
   </div>
-
 
   <div
     class="container bg-[var(--comment)] w-min px-2 py-px rounded-xl"
@@ -297,12 +296,12 @@ res = (bits1 << 1) | (bits2 >> 1)
 
 # Trick: hex
 
-- 上頁的 `mask1` 只有 6 位，那如果是 32 位呢？
+-   上頁的 `mask1` 只有 6 位，那如果是 32 位呢？
 
 ## Hex
 
-- 1 個 hex = 4 bits
-- e.g. `0xA` = `0b0110`
+-   1 個 hex = 4 bits
+-   e.g. `0xA` = `0b1010`, `0x5` = `0b0101`, `0xAAAA = 0b1010101010101010`
 
 <style>
   tbody{
@@ -314,26 +313,27 @@ res = (bits1 << 1) | (bits2 >> 1)
   }
 </style>
 
-|  | 0x0 | 0x1 | 0x2 | 0x3 | 0x4 | 0x5 | 0x6 | 0x7 | 0x8 | 0x9 | 0xA | 0xB | 0xC | 0xD | 0xE | 0xF |
-|---|---| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| $2^0$ |0|1|0|1|0|1|0|1|0|1|0|1|0|1|0|1|
-| $2^1$ |0|0|1|1|0|0|1|1|0|0|1|1|0|0|1|1|
-| $2^2$ |0|0|0|0|1|1|1|1|0|0|0|0|1|1|1|1|
-| $2^3$ |0|0|0|0|0|0|0|0|1|1|1|1|1|1|1|1|
+|       | 0x0 | 0x1 | 0x2 | 0x3 | 0x4 | 0x5 | 0x6 | 0x7 | 0x8 | 0x9 | 0xA | 0xB | 0xC | 0xD | 0xE | 0xF |
+| ----- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| $2^0$ | 0   | 1   | 0   | 1   | 0   | 1   | 0   | 1   | 0   | 1   | 0   | 1   | 0   | 1   | 0   | 1   |
+| $2^1$ | 0   | 0   | 1   | 1   | 0   | 0   | 1   | 1   | 0   | 0   | 1   | 1   | 0   | 0   | 1   | 1   |
+| $2^2$ | 0   | 0   | 0   | 0   | 1   | 1   | 1   | 1   | 0   | 0   | 0   | 0   | 1   | 1   | 1   | 1   |
+| $2^3$ | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 1   | 1   | 1   | 1   | 1   | 1   | 1   | 1   |
 
 ---
-class: text-center 
+
+class: text-center
 layout: center
+
 # vertically center?
 
 ---
 
-
-
 # The end 🎉
 
 ### Group 20
-<!-- 
+
+<!--
   <kbd style="font-size: 1rem; line-height:1.35rem;">B10401006 洪愷希</kbd>
   <kbd style="font-size: 1rem; line-height:1.35rem;">B12505047 陳澤諒</kbd>
   <kbd style="font-size: 1rem; line-height:1.35rem;">B11801005 何宗蕘</kbd>

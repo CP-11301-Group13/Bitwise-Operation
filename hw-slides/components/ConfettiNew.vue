@@ -1,14 +1,25 @@
 <script>
-import confetti from "https://cdn.skypack.dev/canvas-confetti";
+import _confetti from "https://cdn.skypack.dev/canvas-confetti";
+
+const confetti = (args) => {
+    if (!targetIsVisible.value) return;
+
+    _confetti(args);
+};
 
 import { ref, onMounted } from "vue";
+import { useElementVisibility } from '@vueuse/core'
+
+const target = ref(null);
+const targetIsVisible = useElementVisibility(target);
+
 
 const options = {
     ticks: 200,
     gravity: 0.75,
 };
 
-const func = ()=>{
+const func = () => {
     setTimeout(() => {
         confetti({
             particleCount: 100,
@@ -51,16 +62,17 @@ const func = ()=>{
             ...options,
         });
     }, 1500);
+};
 
-}
-
-func()
+func();
 setInterval(() => {
-    func()
+    func();
 }, 5000);
 </script>
 
-<template></template>
+<template>
+    <div ref="target" style="position: fixed"></div>
+</template>
 
 <style>
 button {
