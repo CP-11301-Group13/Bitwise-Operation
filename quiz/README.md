@@ -26,10 +26,10 @@ $$
 a' = \overbrace{10}^{a_2} \enspace\overbrace{00}^{a_3} \enspace \overbrace{10}^{a_0} \enspace\overbrace{01}^{a_1}
 $$
 
-如果 $2k$ 無法整除 $32$，則可視為在 $a$ 的高位補上 $2k\cdot\left\lceil\frac{32}{2k}\right\rceil$ 個 $0$ 後，再將交換後的結果取 $32$ 位元。例如 $k=6$：
+如果 $2k$ 無法整除 $32$，則先將 $a$ 的高位補零使其總位數為 $2k$ 的倍數（即補零後的總位數為 $2k\cdot\left\lceil\frac{32}{2k}\right\rceil$），再進行交換，最後將結果取 $32$ 位元。例如 $k=6$：
 
 $$
-\begin{align*}
+\begin{align}
     &a = 10\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_1}\enspace\overbrace{110011}^{a_0} \\
     \Rightarrow \quad  &\tilde{a} =
         \overbrace{000000}^{a_5}\enspace\overbrace{000010}^{a_4}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_1}\enspace\overbrace{110011}^{a_0}\enspace\\
@@ -38,18 +38,18 @@ $$
     &a' =
          \overbrace{00}^{a_5} \enspace
          \overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110011}^{a_0}\enspace\overbrace{011110}^{a_1}\enspace\\
-\end{align*}
+\end{align}
 $$
 
-上式的 $a'$ 即為所求。
+上式的 $a'$ 即為所求。請注意：你的程式碼並不一定需要計算出 $\tilde{a}$ 和 $\tilde{a}'$，這裡僅是為了說明補零的過程。換言之，本題可以僅使用 32 位元無號整數完成，而不需要用到 `long int`。
 
 ## Input Format
 
 輸入共有兩行，第一行為兩個整數 $N$ 和 $k$，由空格分開；第二行為 $N$ 個整數 $a_1, ..., a_N$，由空格分開。
 
--   $0 < N \leq 400000$
--   $0 \leq k \leq 32$
+-   $0 < N \leq 4\cdot 10^4$
 -   $0 \leq a_i < 2^{32}$
+-   $0 \leq k \leq 32$
 
 ## Output Format
 
@@ -59,7 +59,7 @@ $$
 
 ```
 4 1
-10 12 15 0
+10 12 14 0
 ```
 
 ## Sample Output
@@ -73,7 +73,7 @@ $$
 ```
 10 => 1010 => 0101 => 5
 12 => 1100 => 1100 => 12
-15 => 1110 => 1101 => 13
+14 => 1110 => 1101 => 13
 0  => 0000 => 0000 => 0
 ```
 
@@ -95,32 +95,32 @@ $$
 
 ### Subtask 2 (20%)
 
--   $0 < n \leq 4*1e5$
+-   $0 < n \leq 4\cdot 10^5$
 -   $0\leq a_i < 2^{32}$
 -   $k = 2$
 
 ### Subtask 3 (20%)
 
--   $0 < n \leq 4*1e5$
+-   $0 < n \leq 4\cdot 10^5$
 -   $0\leq a_i < 2^{32}$
 -   $1 \leq k \leq 32$
 -   $k = 2^m,\ m\in \mathbb{N}$
 
 ### Subtask 4 (20%)
 
--   $0 < n \leq 4*1e5$
+-   $0 < n \leq 4\cdot 10^5$
 -   $0\leq a_i < 2^{16}$
 -   $0 \leq k \leq 32$
 
 ### Subtask 5 (20%)
 
--   $0 < n \leq 4*1e5$
+-   $0 < n \leq 4\cdot 10^5$
 -   $0\leq a_i < 2^{32}$
 -   $0 \leq k \leq 32$
 
 ## Hint
 
-請仔細注意測資條件
+請仔細注意測資邊界條件
 
 ## Bonus
 
