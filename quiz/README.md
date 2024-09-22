@@ -26,17 +26,17 @@ $$
 a' = \overbrace{10}^{a_2} \enspace\overbrace{00}^{a_3} \enspace \overbrace{10}^{a_0} \enspace\overbrace{01}^{a_1}
 $$
 
-如果 $2k$ 無法整除 $32$，則先將 $a$ 的高位補零使其總位數為 $2k$ 的倍數（即補零後的總位數為 $2k\cdot\left\lceil\frac{32}{2k}\right\rceil$），再進行交換，最後將結果取 $32$ 位元。例如 $k=6$：
+如果 $2k$ 無法整除 $32$，則先將 $a$ 的高位補零使其總位數為 $2k$ 的倍數（即補零後的總位數為 $2k\cdot\left\lceil\frac{32}{2k}\right\rceil$），再進行交換，最後將結果取 $32$ 位元。例如 $a=3061544883, k=6$：
 
 $$
 \begin{align}
-    &a = 10\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_1}\enspace\overbrace{110011}^{a_0} \\
+    &a = 10 \enspace\overbrace{110110}^{a_4} \enspace\overbrace{011110}^{a_3}\enspace\overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_1}\enspace\overbrace{110011}^{a_0} \\
     \Rightarrow \quad  &\tilde{a} =
-        \overbrace{000000}^{a_5}\enspace\overbrace{000010}^{a_4}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_1}\enspace\overbrace{110011}^{a_0}\enspace\\
+        \overbrace{000010}^{a_5}\enspace\overbrace{110110}^{a_4}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_1}\enspace\overbrace{110011}^{a_0}\enspace\\
     &\tilde{a}' =
-        \overbrace{000010}^{a_4}\enspace\overbrace{000000}^{a_5}\enspace  \overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110011}^{a_0}\enspace\overbrace{011110}^{a_1}\enspace\\
+        \overbrace{110110}^{a_4}\enspace\overbrace{000010}^{a_5}\enspace  \overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110011}^{a_0}\enspace\overbrace{011110}^{a_1}\enspace\\
     &a' =
-         \overbrace{00}^{a_5} \enspace
+         \overbrace{10}^{a_4}\enspace\overbrace{000010}^{a_5} \enspace
          \overbrace{110111}^{a_2}\enspace\overbrace{011110}^{a_3}\enspace\overbrace{110011}^{a_0}\enspace\overbrace{011110}^{a_1}\enspace\\
 \end{align}
 $$
@@ -55,14 +55,14 @@ $$
 
 輸出一行，為 $a_1, ..., a_N$ 交換後的結果。請以十進位數字輸出，並以空格分開。
 
-## Sample Input
+## Sample Input 1
 
 ```
 4 1
 10 12 14 0
 ```
 
-## Sample Output
+## Sample Output 1
 
 ```
 5 12 13 0
@@ -77,42 +77,64 @@ $$
 0  => 0000 => 0000 => 0
 ```
 
+
+## Sample Input 2
+
+```
+1 1
+3061544883
+```
+
+## Sample Output 1
+
+```
+2195582174
+```
+
+### 說明
+
+```
+3061544883 
+=> 10_110110_011110_110111_011110_110011 
+=> 10_000010_110111_011110_110011_011110  
+=> 2195582174
+```
+
+
 ## 測資
 
-共分成六個 subtasks 如下：
-
-### Subtask 0 (10%)
+### Subtask 0-1 (10%)
 
 -   $0 < n \leq 100$
 -   $0\leq a_i < 2^{16}$
 -   $k = 1$
 
-### Subtask 1 (10%)
+### Subtask 2-3 (10%)
 
 -   $0 < n \leq 100$
 -   $0\leq a_i < 2^{16}$
 -   $k = 2$
 
-### Subtask 2 (20%)
+### Subtask 4-5 (20%)
 
 -   $0 < n \leq 4\cdot 10^5$
 -   $0\leq a_i < 2^{32}$
 -   $k = 2$
 
-### Subtask 3 (20%)
+### Subtask 6-7 (20%)
 
 -   $0 < n \leq 4\cdot 10^5$
 -   $0\leq a_i < 2^{32}$
 -   $1 \leq k \leq 32$
 -   $k = 2^m,\ m\in \mathbb{N}$
 
-### Subtask 4 (20%)
+### Subtask 8-9 (20%)
 
 -   $0 < n \leq 4\cdot 10^5$
 -   $0\leq a_i < 2^{16}$
 -   $0 \leq k \leq 32$
 
-### Subtask 5 (20%)
+### Subtask 10-11 (20%)
 
 -   $0 < n \leq 4\cdot 10^5$
 -   $0\leq a_i < 2^{32}$
