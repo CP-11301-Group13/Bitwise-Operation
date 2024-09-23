@@ -123,7 +123,7 @@ int main() {
 
 ### 撰寫報告
 
--   Motivation：陳澤諒
--   Problem/Solution/Code/Test Data：陳澤諒
+-   Motivation：_____
+-   Problem/Solution/Code/Test Data：___
 -   Teamwork：＿＿＿
 -   Reference：＿＿＿
