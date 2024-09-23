@@ -55,7 +55,7 @@ $$
 則進行操作後的結果 $a'$ 滿足（ $0\leq i < 32$ ）：
 
 $$
-\ {a'}_i 
+a'_i 
 = \begin{cases}
     a_i & \text{if } k=0 \\
     \tilde{a} _{i+k} & \text{if } k>0,\enspace  m \cdot k \leq i < (m+1)\cdot k &\text{for some even number } m \\
