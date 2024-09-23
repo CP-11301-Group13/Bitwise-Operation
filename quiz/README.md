@@ -12,7 +12,7 @@
 
 ## 說明
 
-給定 $N$ 個 **32 位元無號整數** $a_1, ..., a_N$ 和一個**非負整數** $k$，請將 $a_i$ 的 bits 以 $k$ 為一組，自低位起對每兩組進行交換，將結果輸出。
+給定 $N$ 個 **32 位元無號整數** $a_1, ..., a_N$ 和一個**非負整數** $k$，請將 $a_i$ 的 bits 以 $k$ 為一組，自低位起對每兩組進行交換，將結果輸出。若 $k=0$，則不需要進行任何操作，直接輸出 $a_i$。 
 
 具體而言，考慮 $a = 00100110$， $k=2$，則分組方式為：
 
@@ -43,7 +43,7 @@ $$
 
 上式的 $a'$ 即為所求。請注意：你的程式碼並不一定需要計算出 $\tilde{a}$ 和 $\tilde{a}'$，這裡僅是為了說明補零的過程。換言之，本題可以僅使用 32 位元無號整數完成，而不需要用到 `long int`。
 
-嚴格地，令 $a_i$ 表示 $a$ 的第 $i$ 個 bit（自最低位起算，$0\leq i<32$），則我們定義補零後的 $\tilde{a}$ 各 bit 為：
+嚴格地，令 $a_i$ 表示 $a$ 的第 $i$ 個 bit（自最低位起算， $0\leq i<32$ ），則我們定義補零後的 $\tilde{a}$ 各 bit 為：
 
 $$
 \tilde{a}_i = \begin{cases}
@@ -52,14 +52,15 @@ $$
     \end{cases}
 $$
 
-則進行操作後的結果 $a'$ 滿足（$0\leq i < 32$）：
+則進行操作後的結果 $a'$ 滿足（ $0\leq i < 32$ ）：
 
 $$
-a'_i = \begin{cases}
+\ {a'}_i 
+= \begin{cases}
     a_i & \text{if } k=0 \\
-    \tilde{a}_{i+k} & \text{if } k>0,\enspace  m \cdot k \leq i < (m+1)\cdot k &\text{for some even number } m \\
-    \tilde{a}_{i-k} & \text{if } k>0, \enspace m \cdot k \leq i < (m+1)\cdot k &\text{for some odd number } m \\
-    \end{cases}
+    \tilde{a} _{i+k} & \text{if } k>0,\enspace  m \cdot k \leq i < (m+1)\cdot k &\text{for some even number } m \\
+    \tilde{a} _{i-k} & \text{if } k>0, \enspace m \cdot k \leq i < (m+1)\cdot k &\text{for some odd number } m \\
+\end{cases}
 $$
 
 ## Input Format
