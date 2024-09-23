@@ -1,8 +1,6 @@
 # Homework
 
-# Quiz
-
-# 位元序順不響影閱讀
+# Quiz：位元序順不響影閱讀
 
 ## Motivation
 
@@ -100,4 +98,32 @@ int main() {
 
 ## Test Data
 
-The testing process involved input files of various complexities to evaluate the efficiency and accuracy of the applied solution. These files contained large arrays of 32-bit unsigned integers with both small and large values to test how well the algorithm handles bit exchanges. The test cases included inputs where `k=1`, `k=2`, and larger values, with edge cases such as zero-padding required due to non-divisible lengths. The solution was rigorously tested to ensure it handles all cases effectively, from arrays with the maximum allowed length to simpler, smaller test cases. Each test case successfully returned the expected results, validating the solution's robustness across different input scenarios.
+測資涉及多種不同複雜度的輸入文件，以評估所應用解決方案的效率和準確性。這些文件包含大量 32 位元無號整數的陣列，數值範圍從小到大，用以測試算法在位元交換處理上的表現。測試案例涵蓋了不同的 `k` 值，包含 `k=1`、`k=2` 等較小值，以及更大的 `k` 值，同時也測試了當位數無法被 `2k` 整除時需要補零的邊界情況。
+
+## Teamwork
+
+### People
+
+| 姓名   | 學號      | 系級   |
+| ------ | --------- | ------ |
+| 洪愷希 | B10401006 | 醫學四 |
+| 何宗蕘 | B11801005 | 公衛三 |
+| 陳澤諒 | B12505047 | 工海二 |
+| 張玉慧 | B12902090 | 資工二 |
+| 温文安 | R13944053 | 網媒一 |
+
+
+### 出題
+
+-   故事：張玉慧
+-   題目：洪愷希
+-   AC Code：洪愷希
+-   測資：陳澤諒
+-   校對：張玉慧
+
+### 撰寫報告
+
+-   Motivation：陳澤諒
+-   Problem/Solution/Code/Test Data：陳澤諒
+-   Teamwork：＿＿＿
+-   Reference：＿＿＿
