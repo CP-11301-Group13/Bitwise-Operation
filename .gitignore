@@ -1,5 +1,6 @@
 __pycache__/
 outputs/
+output/
 .vscode/
 a.exe
 a.out
