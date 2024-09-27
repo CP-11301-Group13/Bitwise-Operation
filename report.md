@@ -1,5 +1,58 @@
 # Homework：二進制之亂，奇偶能量的平衡之道
 
+## Solution
+1. 輸入解析： 
+    讀取測試數量 k。對於每個測試，讀取整數數量 n，然後讀取由 n 個32位元無號整數組成的list。
+2. 位元提取： 對於列表中的每個整數，我們使用位元遮罩提取偶數位（偶數位置的位元）和奇數位（奇數位置的位元）：
+    - 使用mask 0x55555555 提取偶數位（位於 0, 2, 4, …, 30 的位元）。
+	- 使用mask 0xAAAAAAAA 提取奇數位（位於 1, 3, 5, …, 31 的位元）。
+3.	位元移動： 提取位元後:
+	- 將偶數位左移 1 個位置，將它們移到奇數位位置。
+	- 將奇數位右移 1 個位置，將它們移到偶數位位置。
+4.	結合結果： 將移動後的偶數位和奇數位通過位元 OR (|) 操作符結合，形成每個整數的最終結果。
+5.	輸出結果： 修改後的整數將按照輸入的順序列印出來。
+
+
+## Code
+
+時間複雜度為每個測試案例 $O(n)$，其中n是整數的數量。由於我們只進行位元運算和簡單的算術操作，每個整數在固定時間內被處理，因此本演算法對於大量輸入也相當高效。
+
+```c
+#include <stdio.h>
+
+int main() {
+    int k;
+    scanf("%d", &k);
+
+    for (int t = 0; t < k; t++) {
+        int n;
+        scanf("%d", &n);
+
+        unsigned int arr[n];
+        for (int i = 0; i < n; i++) {
+            scanf("%u", &arr[i]);
+        }
+
+        for (int i = 0; i < n; i++) {
+            unsigned int N = arr[i];
+            unsigned int even_bits = N & 0x55555555;  // 取出偶數位
+            unsigned int odd_bits = N & 0xAAAAAAAA;   // 取出奇數位
+
+            even_bits <<= 1;  // 偶數位左移一位
+            odd_bits >>= 1;   // 奇數位右移一位
+
+            unsigned int result = even_bits | odd_bits;
+            printf("%u", result);
+
+            if (i != n - 1) {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+}
+```
+
 # Quiz：位元序順不響影閱讀
 
 ## Motivation
