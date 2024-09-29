@@ -5,4 +5,3 @@ output/
 a.exe
 a.out
 venv/
-.clang-format
