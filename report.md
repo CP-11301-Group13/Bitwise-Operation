@@ -64,6 +64,42 @@ int main() {
 }
 ```
 
+## Testdata
+
+測資方面，我們的測資數量隨著subtask的分配，呈現指數等級成長在，最後一筆測資有大約160000筆，試圖要求答題者使用我們要求的演算法，在edge case的部分我們簡單的考慮了0的情況，在大多數的解法下不會造成太大的困難。
+
+## Teamwork
+
+### People
+
+| 姓名   | 學號      | 系級   |
+| ------ | --------- | ------ |
+| 洪愷希 | B10401006 | 醫學四 |
+| 何宗蕘 | B11801005 | 公衛三 |
+| 陳澤諒 | B12505047 | 工海二 |
+| 張玉慧 | B12902090 | 資工二 |
+| 温文安 | R13944053 | 網媒一 |
+
+
+### 出題
+
+-   故事：何宗蕘
+-   題目：温文安
+-   AC Code：温文安
+-   測資：張玉慧
+-   校對：何宗蕘
+-   課堂報告：洪愷希
+
+### 撰寫報告
+
+-   Motivation/Problem：何宗蕘
+-   Solution/Code：陳澤諒
+-   Test Data/Teamwork/Reference：温文安
+
+## Reference
+
+> Credit: [geekforgeeks](https://www.geeksforgeeks.org/swap-all-odd-and-even-bits/)
+
 # Quiz：位元序順不響影閱讀
 
 ## Motivation
@@ -184,10 +220,16 @@ int main() {
 -   AC Code：洪愷希
 -   測資：陳澤諒
 -   校對：張玉慧
+-   課堂報告：温文安
 
 ### 撰寫報告
 
--   Motivation：_____
--   Problem/Solution/Code/Test Data：___
--   Teamwork：＿＿＿
--   Reference：＿＿＿
+-   Motivation/Problem：何宗蕘
+-   Solution/Code：陳澤諒
+-   Test Data/Teamwork/Reference：洪愷希
+
+## Reference
+
+> Credit: [Github Copilot](https://github.com/features/copilot)
+
+
